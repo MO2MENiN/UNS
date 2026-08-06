@@ -1,0 +1,85 @@
+/* ==========================================================================
+   UNS (أنس) — Design Tokens
+   ========================================================================== */
+:root {
+  /* Brand colors */
+  --color-primary: #0F766E;
+  --color-primary-dark: #0B5952;
+  --color-primary-light: #14B8A6;
+  --color-secondary: #D4AF37;
+  --color-bg: #F8F6F1;
+  --color-surface: #FFFFFF;
+  --color-text: #1E293B;
+  --color-text-muted: #64748B;
+  --color-success: #16A34A;
+  --color-border: rgba(30, 41, 59, 0.08);
+  --color-overlay: rgba(15, 23, 42, 0.55);
+
+  /* Elevation */
+  --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --shadow-medium: 0 8px 30px rgba(15, 23, 42, 0.10);
+  --shadow-button: 0 6px 18px rgba(15, 118, 110, 0.35);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Typography */
+  --font-family: 'UNS-System', 'Segoe UI', Tahoma, Geneva, Arial, sans-serif;
+  --font-size-base: 18px;
+  --font-size-sm: 0.85em;
+  --font-size-lg: 1.2em;
+  --font-size-xl: 1.6em;
+  --line-height-relaxed: 1.9;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-medium: 280ms cubic-bezier(.4,0,.2,1);
+  --transition-slow: 420ms cubic-bezier(.4,0,.2,1);
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --bottom-nav-height: 68px;
+  --header-height: 96px;
+}
+
+[data-theme="dark"] {
+  --color-primary: #14B8A6;
+  --color-primary-dark: #0F766E;
+  --color-primary-light: #2DD4BF;
+  --color-secondary: #E7C34F;
+  --color-bg: #0D1412;
+  --color-surface: #16211E;
+  --color-text: #ECEDEE;
+  --color-text-muted: #9AA5A2;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Font family options selectable from settings */
+[data-font="system"] { --font-family: 'UNS-System', 'Segoe UI', Tahoma, Geneva, Arial, sans-serif; }
+[data-font="traditional"] { --font-family: 'Traditional Arabic', 'Times New Roman', 'UNS-System', serif; }
+[data-font="simplified"] { --font-family: 'Simplified Arabic', Tahoma, 'UNS-System', sans-serif; }
+[data-font="rounded"] { --font-family: 'Geeza Pro', 'Arial Rounded MT Bold', 'UNS-System', sans-serif; }
+
+/* Font size options */
+[data-fontsize="sm"] { --font-size-base: 16px; }
+[data-fontsize="md"] { --font-size-base: 18px; }
+[data-fontsize="lg"] { --font-size-base: 21px; }
+[data-fontsize="xl"] { --font-size-base: 25px; }

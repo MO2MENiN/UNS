@@ -1,0 +1,55 @@
+/* ==========================================================================
+   UNS (أنس) — Animations
+   ========================================================================== */
+
+@keyframes uns-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes uns-pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.03); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes uns-check-pop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes uns-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(15,118,110,0.35); }
+  50% { box-shadow: 0 0 0 14px rgba(15,118,110,0); }
+}
+
+.view-enter {
+  animation: uns-fade-in var(--transition-medium) both;
+}
+
+.category-card, .dhikr-list-item {
+  animation: uns-fade-in var(--transition-medium) both;
+}
+
+.dhikr-stage__card {
+  animation: uns-pop var(--transition-medium) both;
+}
+
+.dhikr-list-item--done .dhikr-list-item__check svg {
+  animation: uns-check-pop 260ms ease both;
+}
+
+.completion-screen__icon {
+  animation: uns-pop 420ms cubic-bezier(.34,1.56,.64,1) both;
+}
+
+.tap-button--tapped {
+  animation: uns-pulse 500ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-card, .dhikr-list-item, .dhikr-stage__card, .completion-screen__icon, .view-enter {
+    animation: none !important;
+  }
+}

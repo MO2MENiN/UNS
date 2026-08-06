@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <title>أنس - UNS | تطبيق الأذكار</title>
+  <meta name="description" content="أنس - تطبيق أذكار إسلامي أنيق يعمل بدون إنترنت، لتسبيح وحفظ وتتبع أذكارك اليومية." />
+
+  <meta name="theme-color" content="#0F766E" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="أنس" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-180.png" />
+
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+<body>
+  <a href="#app-outlet" class="skip-link">تخطَّ إلى المحتوى</a>
+
+  <div id="app">
+    <header class="app-header" id="app-header" role="banner"></header>
+
+    <main class="app-main" id="main">
+      <div id="app-outlet" tabindex="-1"></div>
+    </main>
+
+    <nav class="bottom-nav" id="bottom-nav" role="navigation" aria-label="التنقل السفلي"></nav>
+
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+      <div class="toast__inner"></div>
+    </div>
+
+    <div class="install-banner" id="install-banner"></div>
+    <div class="update-banner" id="update-banner"></div>
+  </div>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

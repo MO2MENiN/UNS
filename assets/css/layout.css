@@ -1,0 +1,195 @@
+/* ==========================================================================
+   UNS (أنس) — App Shell Layout
+   ========================================================================== */
+.app-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  padding-top: var(--safe-top);
+  background: linear-gradient(180deg, var(--color-surface) 85%, transparent);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+}
+
+.app-header__row {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.app-header__brand-icon {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
+}
+
+.app-header__title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.app-header__dates {
+  text-align: start;
+}
+
+.app-header__hijri {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.app-header__gregorian {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.app-header__back {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+}
+
+.app-header__search-btn {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+}
+
+/* Bottom navigation */
+.bottom-nav {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding-bottom: var(--safe-bottom);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+}
+
+.bottom-nav__row {
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  height: var(--bottom-nav-height);
+}
+
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+  min-height: 44px;
+  transition: color var(--transition-fast);
+}
+
+.bottom-nav__item svg { width: 22px; height: 22px; }
+
+.bottom-nav__item[aria-current="page"] {
+  color: var(--color-primary);
+}
+
+.bottom-nav__item[aria-current="page"] svg {
+  filter: drop-shadow(0 2px 6px rgba(15,118,110,0.35));
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + var(--safe-bottom) + 14px);
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.toast__inner {
+  background: var(--color-text);
+  color: var(--color-surface);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition-medium);
+}
+
+.toast--visible .toast__inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Install banner */
+.install-banner {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + var(--safe-bottom) + var(--space-3));
+  inset-inline: var(--space-4);
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-medium);
+  z-index: 60;
+  transform: translateY(140%);
+  transition: transform var(--transition-slow);
+}
+
+.install-banner--visible { transform: translateY(0); }
+
+.install-banner__text { flex: 1; font-size: 0.85rem; }
+
+.install-banner__actions { display: flex; gap: var(--space-2); }
+
+.install-banner__btn {
+  background: rgba(255,255,255,0.2);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.install-banner__btn--primary { background: var(--color-secondary); color: #1E293B; }
+
+/* Update banner */
+.update-banner {
+  position: fixed;
+  top: calc(var(--header-height) + var(--safe-top) + var(--space-2));
+  inset-inline: var(--space-4);
+  background: var(--color-secondary);
+  color: #1E293B;
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-medium);
+  z-index: 60;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transform: translateY(-140%);
+  transition: transform var(--transition-slow);
+}
+
+.update-banner--visible { transform: translateY(0); }
