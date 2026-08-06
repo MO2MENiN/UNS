@@ -17,7 +17,7 @@ export async function renderCategory(params, outlet) {
   const settings = getSettings();
 
   outlet.innerHTML = `
-    <h1 class="section-title" style="margin-top:0">${category ? category.name : ""}</h1>
+    <h1 class="visually-hidden">${category ? category.name : ""}</h1>
     <div id="category-list"></div>
   `;
 
@@ -52,10 +52,11 @@ export async function renderCategory(params, outlet) {
       const fav = isFavorite(id, item.ID);
       const text = renderText(item.NAME, settings.tashkeel);
       return `
-      <article class="dhikr-list-item ${done ? "dhikr-list-item--done" : ""}" data-index="${index}">
-        <button class="dhikr-list-item__check" aria-hidden="true" tabindex="-1">
+      <article class="dhikr-list-item ${done ? "dhikr-list-item--done" : ""}" data-index="${index}"
+        role="button" tabindex="0" aria-label="${text}${done ? "، مكتمل" : ""}">
+        <span class="dhikr-list-item__check" aria-hidden="true">
           ${icon("check-circle", 16)}
-        </button>
+        </span>
         <div class="dhikr-list-item__body">
           <p class="dhikr-list-item__text arabic-text">${text}</p>
           <div class="dhikr-list-item__meta">
@@ -69,6 +70,10 @@ export async function renderCategory(params, outlet) {
     })
     .join("");
 
+  function openItem(index) {
+    navigate(`/dhikr/${id}/${index}`);
+  }
+
   listEl.addEventListener("click", (e) => {
     const favBtn = e.target.closest(".dhikr-list-item__fav");
     if (favBtn) {
@@ -80,8 +85,16 @@ export async function renderCategory(params, outlet) {
       return;
     }
     const item = e.target.closest(".dhikr-list-item");
+    if (item) openItem(item.dataset.index);
+  });
+
+  listEl.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    if (e.target.closest(".dhikr-list-item__fav")) return;
+    const item = e.target.closest(".dhikr-list-item");
     if (item) {
-      navigate(`/dhikr/${id}/${item.dataset.index}`);
+      e.preventDefault();
+      openItem(item.dataset.index);
     }
   });
 }

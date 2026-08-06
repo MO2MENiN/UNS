@@ -13,7 +13,7 @@ import { showToast } from "../utils/toast.js";
 
 export async function renderFavorites(params, outlet) {
   outlet.innerHTML = `
-    <h1 class="section-title" style="margin-top:0">المفضلة</h1>
+    <h1 class="visually-hidden">المفضلة</h1>
     <div id="fav-list"></div>
   `;
   const listEl = outlet.querySelector("#fav-list");
@@ -64,8 +64,9 @@ export async function renderFavorites(params, outlet) {
   listEl.innerHTML = rows
     .map(
       (r, i) => `
-      <article class="dhikr-list-item" data-index="${i}" data-cat="${r.categoryId}">
-        <button class="dhikr-list-item__check" aria-hidden="true" tabindex="-1" style="border-color:transparent;color:var(--color-secondary)">${icon("star", 16)}</button>
+      <article class="dhikr-list-item" data-index="${i}" data-cat="${r.categoryId}"
+        role="button" tabindex="0" aria-label="${renderText(r.item.NAME, settings.tashkeel)}، ${r.categoryName}">
+        <span class="dhikr-list-item__check" aria-hidden="true" style="border-color:transparent;color:var(--color-secondary)">${icon("star", 16)}</span>
         <div class="dhikr-list-item__body">
           <p class="dhikr-list-item__text arabic-text">${renderText(r.item.NAME, settings.tashkeel)}</p>
           <div class="dhikr-list-item__meta">
@@ -79,6 +80,15 @@ export async function renderFavorites(params, outlet) {
     )
     .join("");
 
+  function openRow(article) {
+    const row = rows[Number(article.dataset.index)];
+    if (!row) return;
+    loadCategory(row.categoryId).then((data) => {
+      const itemIndex = data.items.findIndex((it) => it.ID === row.item.ID);
+      navigate(`/dhikr/${row.categoryId}/${Math.max(itemIndex, 0)}`);
+    });
+  }
+
   listEl.addEventListener("click", (e) => {
     const favBtn = e.target.closest(".dhikr-list-item__fav");
     if (favBtn) {
@@ -89,14 +99,16 @@ export async function renderFavorites(params, outlet) {
       return;
     }
     const article = e.target.closest(".dhikr-list-item");
+    if (article) openRow(article);
+  });
+
+  listEl.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    if (e.target.closest(".dhikr-list-item__fav")) return;
+    const article = e.target.closest(".dhikr-list-item");
     if (article) {
-      const idx = rows.findIndex((r, i) => String(i) === article.dataset.index);
-      const row = rows[idx];
-      if (!row) return;
-      loadCategory(row.categoryId).then((data) => {
-        const itemIndex = data.items.findIndex((it) => it.ID === row.item.ID);
-        navigate(`/dhikr/${row.categoryId}/${Math.max(itemIndex, 0)}`);
-      });
+      e.preventDefault();
+      openRow(article);
     }
   });
 }

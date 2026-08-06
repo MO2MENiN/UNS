@@ -78,8 +78,9 @@ export async function renderSearch(params, outlet) {
         .slice(0, 40)
         .map(
           (m) => `
-        <article class="dhikr-list-item" data-nav="/dhikr/${m.cat.id}/${m.idx}">
-          <button class="dhikr-list-item__check" aria-hidden="true" tabindex="-1" style="border-color:transparent;color:var(--color-primary)">${icon(m.cat.icon, 16)}</button>
+        <article class="dhikr-list-item" data-nav="/dhikr/${m.cat.id}/${m.idx}"
+          role="button" tabindex="0" aria-label="${renderText(m.item.NAME, settings.tashkeel)}، ${m.cat.name}">
+          <span class="dhikr-list-item__check" aria-hidden="true" style="border-color:transparent;color:var(--color-primary)">${icon(m.cat.icon, 16)}</span>
           <div class="dhikr-list-item__body">
             <p class="dhikr-list-item__text arabic-text">${renderText(m.item.NAME, settings.tashkeel)}</p>
             <div class="dhikr-list-item__meta"><span>${m.cat.name}</span></div>
@@ -94,5 +95,14 @@ export async function renderSearch(params, outlet) {
   resultsEl.addEventListener("click", (e) => {
     const el = e.target.closest("[data-nav]");
     if (el) navigate(el.dataset.nav);
+  });
+
+  resultsEl.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const el = e.target.closest("[data-nav]");
+    if (el) {
+      e.preventDefault();
+      navigate(el.dataset.nav);
+    }
   });
 }
