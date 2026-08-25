@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>أنس - UNS | الأذكار والأدعية</title>
+<meta name="description" content="تطبيق أنس للأذكار والأدعية اليومية، يعمل بالكامل بدون إنترنت." />
+<meta name="theme-color" content="#0F1F1A" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="assets/icons/icon-192.svg" />
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/home.css" />
+<link rel="stylesheet" href="css/section.css" />
+<link rel="stylesheet" href="css/dhikr.css" />
+<link rel="stylesheet" href="css/settings.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<script>
+  // Decode the path GitHub Pages' 404.html redirect trick encoded into the query string,
+  // and restore the real URL before the router reads it. No-op on any normal host/route.
+  (function (l) {
+    if (l.search[1] !== '/') return;
+    var decoded = l.search.slice(1).split('&').map(function (s) {
+      return s.replace(/~and~/g, '&');
+    }).join('?');
+    window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+  })(window.location);
+</script>
+
+<div id="app">
+  <header class="app-header" id="appHeader" hidden>
+    <button class="app-header__back" id="backBtn" aria-label="رجوع">
+      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-back"></use></svg>
+    </button>
+    <h1 class="app-header__title"></h1>
+  </header>
+
+  <main id="view" role="main"></main>
+
+  <nav class="tabbar" aria-label="التنقل الرئيسي">
+    <a class="tabbar__item" data-route="home" href="/" data-route-link>
+      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-home"></use></svg>
+      <span>الرئيسية</span>
+    </a>
+    <a class="tabbar__item" data-route="favorites" href="/favorites" data-route-link>
+      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+      <span>المفضلة</span>
+    </a>
+    <a class="tabbar__item" data-route="settings" href="/settings" data-route-link>
+      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-settings"></use></svg>
+      <span>الإعدادات</span>
+    </a>
+  </nav>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

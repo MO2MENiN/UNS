@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Section screen / Favorites screen — list of dhikr items
+   ========================================================================== */
+
+.section-intro {
+  padding: var(--space-4) 0 var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.dhikr-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+}
+
+.dhikr-item-wrap {
+  position: relative;
+}
+
+.dhikr-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.dhikr-item__stretch-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.dhikr-item__index {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.dhikr-item__body { flex: 1; min-width: 0; }
+.dhikr-item__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.dhikr-item__excerpt {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dhikr-item__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.dhikr-item__count {
+  font-size: 0.72rem;
+  color: var(--color-accent-2);
+  background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+}
+
+.fav-btn {
+  position: relative;
+  z-index: 2;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-pill);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted);
+}
+.fav-btn.is-active { color: var(--color-accent); }
+.fav-btn .icon { width: 19px; height: 19px; }
+
+/* Search results screen reuses dhikr-list, with section tag */
+.dhikr-item__section-tag {
+  font-size: 0.7rem;
+  color: var(--color-primary-2);
+  margin-inline-start: var(--space-2);
+}

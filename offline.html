@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>غير متصل - أنس UNS</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FAF7F1;
+    color: #1C231F;
+    font-family: "Segoe UI", Tahoma, "Geeza Pro", Arial, sans-serif;
+    text-align: center;
+    padding: 24px;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #0D1512; color: #F1EFE6; }
+  }
+  .wrap { max-width: 340px; }
+  .mark {
+    width: 64px; height: 64px;
+    border-radius: 18px;
+    background: #0F1F1A;
+    color: #C9A24B;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 auto 20px;
+  }
+  h1 { font-size: 1.1rem; margin: 0 0 8px; }
+  p { font-size: 0.9rem; opacity: 0.75; line-height: 1.7; margin: 0 0 20px; }
+  button {
+    border: none;
+    background: #1F6F5C;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark">أ</div>
+    <h1>تعذر فتح أنس - UNS</h1>
+    <p>لم يتم تحميل التطبيق مسبقًا على هذا الجهاز، لذا يلزم الاتصال بالإنترنت مرة واحدة فقط لإكمال التثبيت.</p>
+    <button onclick="location.reload()">إعادة المحاولة</button>
+  </div>
+</body>
+</html>

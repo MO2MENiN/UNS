@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>أنس - UNS</title>
+<script>
+  // Standard GitHub-Pages SPA redirect trick.
+  // GitHub Pages serves this file for any unknown path (like /section/azkar-alsabah),
+  // since it has no server-side rewrite rules. This encodes the requested path into
+  // a query string and redirects to index.html, which decodes it back on load.
+  //
+  // pathSegmentsToKeep:
+  //   - Project page  (https://USERNAME.github.io/REPO-NAME/...)  -> 1  (default below)
+  //   - User/org page (https://USERNAME.github.io/...)            -> 0
+  var pathSegmentsToKeep = 1;
+
+  var l = window.location;
+  l.replace(
+    l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+    l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+    l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+    (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+    l.hash
+  );
+</script>
+</head>
+<body></body>
+</html>

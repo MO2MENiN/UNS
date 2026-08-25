@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Responsive adjustments
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .sections-grid { grid-template-columns: repeat(3, 1fr); }
+  .container { padding: 0 var(--space-6); }
+}
+
+@media (min-width: 900px) {
+  .sections-grid { grid-template-columns: repeat(4, 1fr); }
+  .container { max-width: 880px; }
+
+  .tabbar {
+    inset-inline: 0;
+    max-width: 880px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-inline: 1px solid var(--color-border);
+  }
+
+  .dhikr-text { font-size: 2.2rem; }
+}
+
+@media (max-width: 360px) {
+  .dhikr-counter-btn { width: 132px; height: 132px; }
+  .dhikr-counter-btn__num { font-size: 2rem; }
+}
+
+@media (min-width: 1100px) {
+  .container { max-width: 960px; }
+}

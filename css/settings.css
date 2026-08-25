@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Settings screen
+   ========================================================================== */
+
+.settings-group {
+  margin-bottom: var(--space-6);
+}
+
+.settings-group__title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
+  padding: 0 4px;
+}
+
+.settings-list {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+.settings-row:last-child { border-bottom: none; }
+
+.settings-row__label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.settings-row__label span:first-child { font-size: 0.9rem; font-weight: 600; }
+.settings-row__hint { font-size: 0.75rem; color: var(--color-text-muted); }
+
+.segmented {
+  display: flex;
+  background: var(--color-surface-2);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+}
+.segmented button {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.segmented button.is-active {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.settings-row--danger .settings-row__label span:first-child { color: var(--color-danger); }
+
+.app-about {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  padding: var(--space-5) 0;
+}

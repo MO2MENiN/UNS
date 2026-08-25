@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Dhikr full-screen reading + counter
+   ========================================================================== */
+
+.dhikr-view {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-h));
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.dhikr-view__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.dhikr-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.dhikr-progress__track {
+  width: 90px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-2);
+  overflow: hidden;
+}
+.dhikr-progress__track span {
+  display: block;
+  height: 100%;
+  background: var(--color-primary-2);
+  border-radius: inherit;
+  transition: width var(--duration-med) var(--ease-out);
+}
+
+.dhikr-text-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.dhikr-text {
+  font-family: var(--font-quran);
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  line-height: 2.1;
+  text-align: center;
+  color: var(--color-text);
+  max-width: 60ch;
+  transition: opacity var(--duration-med) var(--ease-out);
+}
+
+.dhikr-title {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.dhikr-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.dhikr-counter-btn {
+  width: 156px; height: 156px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--duration-fast) var(--ease-out), background var(--duration-med);
+  position: relative;
+}
+.dhikr-counter-btn:active { transform: scale(0.94); }
+.dhikr-counter-btn__num {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.dhikr-counter-btn__target {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+.dhikr-counter-btn.is-complete {
+  background: var(--color-primary-2);
+}
+.dhikr-counter-btn.pulse {
+  animation: dhikr-pulse 420ms var(--ease-out);
+}
+@keyframes dhikr-pulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.dhikr-secondary-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dhikr-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.dhikr-nav-row .btn { flex: 1; }
+
+.dhikr-complete-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--color-primary-2);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-top: var(--space-3);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--duration-med) var(--ease-out), transform var(--duration-med) var(--ease-out);
+}
+.dhikr-complete-banner.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
