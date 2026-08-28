@@ -21,15 +21,17 @@
   background: var(--color-primary);
   display: flex; align-items: center; justify-content: center;
   color: var(--color-accent);
-  font-weight: 700;
-  font-size: 1.1rem;
+}
+.home-hero__mark .icon {
+  width: 24px; height: 24px;
+  stroke-width: 1.5;
 }
 
 .home-hero__title {
   font-size: 1.2rem;
   font-weight: 800;
   margin: 0;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 .home-hero__subtitle {
   margin: 2px 0 0;
@@ -59,10 +61,12 @@
   width: 44px; height: 44px;
   border-radius: var(--radius-pill);
   background: rgba(244, 239, 227, 0.14);
+  border: 1px solid rgba(244, 239, 227, 0.18);
   display: flex; align-items: center; justify-content: center;
   color: var(--color-accent);
   flex-shrink: 0;
 }
+.continue-card__icon .icon { width: 20px; height: 20px; }
 .continue-card__body { flex: 1; min-width: 0; }
 .continue-card__label {
   font-size: 0.72rem;
@@ -108,12 +112,14 @@
 }
 
 .section-card__icon {
-  width: 40px; height: 40px;
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-2);
+  width: 42px; height: 42px;
+  border-radius: var(--radius-pill);
+  background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-primary-2) 18%, transparent), var(--color-surface-2));
+  border: 1px solid var(--color-border);
   display: flex; align-items: center; justify-content: center;
   color: var(--color-primary-2);
 }
+.section-card__icon .icon { width: 20px; height: 20px; }
 
 .section-card__title {
   font-size: 0.9rem;

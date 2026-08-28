@@ -101,7 +101,7 @@ function renderHome() {
     <div class="container">
       <div class="home-hero">
         <div class="home-hero__brand">
-          <div class="home-hero__mark">أ</div>
+          <div class="home-hero__mark">${UI.icon('mark')}</div>
           <div>
             <p class="home-hero__title">أنس <span style="opacity:.55;font-weight:500">UNS</span></p>
             <p class="home-hero__subtitle">الأذكار والأدعية اليومية</p>
@@ -270,10 +270,12 @@ function renderDhikr({ sectionId, dhikrId }) {
       <div class="dhikr-complete-banner" id="completeBanner">${UI.icon('check')}<span>تم إكمال هذا الذكر</span></div>
 
       <div class="dhikr-controls">
-        <button class="dhikr-counter-btn" id="counterBtn" aria-label="اضغط للعد">
-          <span class="dhikr-counter-btn__num" id="counterNum"></span>
-          <span class="dhikr-counter-btn__target" id="counterTarget"></span>
-        </button>
+        <div class="dhikr-counter-ring">
+          <button class="dhikr-counter-btn" id="counterBtn" aria-label="اضغط للعد">
+            <span class="dhikr-counter-btn__num" id="counterNum"></span>
+            <span class="dhikr-counter-btn__target" id="counterTarget"></span>
+          </button>
+        </div>
         <div class="dhikr-secondary-row">
           <button class="btn btn--ghost" id="decrementBtn">${UI.icon('back')} إنقاص</button>
           <button class="btn btn--ghost" id="resetBtn">${UI.icon('reset')} إعادة تعيين</button>

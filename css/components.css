@@ -107,6 +107,7 @@
 }
 
 .tabbar__item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,7 +120,15 @@
 }
 .tabbar__item .icon { width: 22px; height: 22px; }
 .tabbar__item.is-active { color: var(--color-primary-2); }
-.tabbar__item.is-active .icon { stroke-width: 2.1; }
+.tabbar__item.is-active .icon { stroke-width: 1.9; }
+.tabbar__item.is-active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
 
 /* Toast */
 .toast {
