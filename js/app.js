@@ -57,6 +57,13 @@ function presentText(text) {
   return tashkeelOn ? text : Tashkeel.stripTashkeel(text);
 }
 
+// The toggle button shows the mode a tap will switch *to*: a sun while it's currently
+// dark (tap for day), a crescent while it's currently light (tap for night).
+function resolvedThemeIcon() {
+  const resolved = document.documentElement.getAttribute('data-theme');
+  return resolved === 'dark' ? 'sun' : 'moon';
+}
+
 /* -------------------------------------------------------------------- */
 /* Screen: Home                                                         */
 /* -------------------------------------------------------------------- */
@@ -108,7 +115,7 @@ function renderHome() {
           </div>
         </div>
         <div class="home-hero__actions">
-          <button class="btn btn--icon" id="themeToggleBtn" aria-label="تبديل المظهر">${UI.icon('moon')}</button>
+          <button class="btn btn--icon" id="themeToggleBtn" aria-label="تبديل المظهر">${UI.icon(resolvedThemeIcon())}</button>
         </div>
       </div>
 
@@ -141,10 +148,11 @@ function renderHome() {
   }
 
   document.getElementById('themeToggleBtn').addEventListener('click', () => {
-    const current = Settings.get().theme;
     const resolved = document.documentElement.getAttribute('data-theme');
     const next = resolved === 'dark' ? 'light' : 'dark';
     Settings.set('theme', next);
+    const btn = document.getElementById('themeToggleBtn');
+    btn.innerHTML = UI.icon(resolvedThemeIcon());
   });
 
   const searchInput = document.getElementById('homeSearchInput');
@@ -256,7 +264,7 @@ function renderDhikr({ sectionId, dhikrId }) {
           <span id="progressLabel"></span>
         </div>
         <div style="display:flex;gap:8px;">
-          <button class="btn btn--icon ${tashkeelOn ? 'is-active' : ''}" id="tashkeelBtn" aria-label="تبديل التشكيل">${UI.icon('tashkeel')}</button>
+          <button class="btn btn--icon ${tashkeelOn ? 'is-active' : ''}" id="tashkeelBtn" aria-label="${tashkeelOn ? 'إخفاء التشكيل' : 'إظهار التشكيل'}">${UI.icon(tashkeelOn ? 'tashkeel' : 'tashkeel-off')}</button>
           <button class="btn btn--icon ${isFav() ? 'is-active' : ''}" id="favBtn" aria-label="إضافة للمفضلة">${UI.icon(isFav() ? 'star-fill' : 'star')}</button>
         </div>
       </div>
@@ -342,7 +350,10 @@ function renderDhikr({ sectionId, dhikrId }) {
   document.getElementById('tashkeelBtn').addEventListener('click', () => {
     tashkeelOn = !tashkeelOn;
     Settings.set('tashkeel', tashkeelOn);
-    document.getElementById('tashkeelBtn').classList.toggle('is-active', tashkeelOn);
+    const btn = document.getElementById('tashkeelBtn');
+    btn.classList.toggle('is-active', tashkeelOn);
+    btn.innerHTML = UI.icon(tashkeelOn ? 'tashkeel' : 'tashkeel-off');
+    btn.setAttribute('aria-label', tashkeelOn ? 'إخفاء التشكيل' : 'إظهار التشكيل');
     refresh();
   });
 
@@ -462,7 +473,7 @@ function renderSettings() {
   const s = Settings.get();
 
   const themeOptions = [
-    ['light', 'فاتح'], ['dark', 'داكن'], ['system', 'تلقائي']
+    ['light', 'فاتح', 'sun'], ['dark', 'داكن', 'moon'], ['system', 'تلقائي', 'theme-auto']
   ];
   const fontOptions = [
     ['sm', 'صغير'], ['md', 'متوسط'], ['lg', 'كبير'], ['xl', 'أكبر']
@@ -476,7 +487,7 @@ function renderSettings() {
           <div class="settings-row">
             <div class="settings-row__label"><span>السمة</span></div>
             <div class="segmented" id="themeSeg">
-              ${themeOptions.map(([v, l]) => `<button data-value="${v}" class="${s.theme === v ? 'is-active' : ''}">${l}</button>`).join('')}
+              ${themeOptions.map(([v, l, ic]) => `<button data-value="${v}" class="${s.theme === v ? 'is-active' : ''}">${UI.icon(ic)}<span>${l}</span></button>`).join('')}
             </div>
           </div>
           <div class="settings-row">
@@ -492,7 +503,7 @@ function renderSettings() {
         <p class="settings-group__title">القراءة والتسبيح</p>
         <div class="settings-list">
           <div class="settings-row">
-            <div class="settings-row__label"><span>التشكيل الافتراضي</span><span class="settings-row__hint">إظهار التشكيل عند فتح الأذكار</span></div>
+            <div class="settings-row__label"><span>${UI.icon(s.tashkeel ? 'tashkeel' : 'tashkeel-off')} التشكيل الافتراضي</span><span class="settings-row__hint">إظهار التشكيل عند فتح الأذكار</span></div>
             <button class="switch ${s.tashkeel ? 'is-on' : ''}" id="tashkeelSwitch" role="switch" aria-checked="${s.tashkeel}"></button>
           </div>
           <div class="settings-row">

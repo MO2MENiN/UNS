@@ -36,7 +36,17 @@
   flex-direction: column;
   gap: 2px;
 }
-.settings-row__label span:first-child { font-size: 0.9rem; font-weight: 600; }
+.settings-row__label span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.settings-row__label span:first-child .icon {
+  width: 17px; height: 17px;
+  color: var(--color-text-muted);
+}
 .settings-row__hint { font-size: 0.75rem; color: var(--color-text-muted); }
 
 .segmented {
@@ -47,11 +57,18 @@
   gap: 2px;
 }
 .segmented button {
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
   border-radius: var(--radius-pill);
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--color-text-muted);
+}
+.segmented button .icon {
+  width: 15px; height: 15px;
+  stroke-width: 1.8;
 }
 .segmented button.is-active {
   background: var(--color-primary);

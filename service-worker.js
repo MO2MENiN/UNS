@@ -1,6 +1,6 @@
 // service-worker.js — manual, dependency-free offline-first caching.
 
-const CACHE_VERSION = 'uns-cache-v1';
+const CACHE_VERSION = 'uns-cache-v2';
 
 // All paths are relative to this file's location, so the app works
 // whether it's deployed at the domain root or in a sub-directory.
@@ -29,9 +29,10 @@ const PRECACHE_URLS = [
   'js/settings.js',
   'js/ui.js',
   'assets/icons/sprite.svg',
-  'assets/icons/icon-192.svg',
-  'assets/icons/icon-512.svg',
-  'assets/icons/icon-maskable.svg',
+  'assets/icons/app-icon-192.png',
+  'assets/icons/app-icon-512.png',
+  'assets/icons/app-icon-maskable.png',
+  'assets/icons/favicon-48.png',
   'data/sections.json',
   'data/ad3yat-almayet.json',
   'data/azkar-alestekaz.json',
