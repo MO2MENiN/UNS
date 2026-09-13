@@ -1,7 +1,6 @@
 // search.js — offline, in-memory search across sections and dhikr items.
 import { Tashkeel } from './tashkeel.js';
 
-let indexBuilt = false;
 let entries = []; // { sectionId, sectionTitle, dhikrId, title, text, normTitle, normText, normSectionTitle }
 
 function buildIndex(sections, dhikrIndexBySection) {
@@ -22,11 +21,6 @@ function buildIndex(sections, dhikrIndexBySection) {
       });
     }
   }
-  indexBuilt = true;
-}
-
-function isReady() {
-  return indexBuilt;
 }
 
 function query(rawQuery, limit = 40) {
@@ -46,4 +40,4 @@ function query(rawQuery, limit = 40) {
   return results;
 }
 
-export const Search = { buildIndex, isReady, query };
+export const Search = { buildIndex, query };

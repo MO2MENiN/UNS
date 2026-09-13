@@ -65,10 +65,6 @@ function write(state) {
   }
 }
 
-function getState() {
-  return read();
-}
-
 function updateState(mutator) {
   const state = read();
   mutator(state);
@@ -135,8 +131,6 @@ function applyDailyResetIfNeeded() {
 }
 
 export const Storage = {
-  getState,
-  updateState,
   getSettings,
   setSetting,
   getFavorites,
@@ -147,6 +141,5 @@ export const Storage = {
   getLastState,
   setLastState,
   resetAllProgress,
-  applyDailyResetIfNeeded,
-  todayLocal
+  applyDailyResetIfNeeded
 };

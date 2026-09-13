@@ -31,6 +31,12 @@
 }
 .settings-row:last-child { border-bottom: none; }
 
+.settings-row--stack {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
 .settings-row__label {
   display: flex;
   flex-direction: column;
@@ -59,16 +65,25 @@
 .segmented button {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  gap: 4px;
+  padding: 7px 4px;
   border-radius: var(--radius-pill);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: var(--color-text-muted);
+  white-space: nowrap;
+}
+.segmented button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .segmented button .icon {
   width: 15px; height: 15px;
   stroke-width: 1.8;
+  flex-shrink: 0;
 }
 .segmented button.is-active {
   background: var(--color-primary);

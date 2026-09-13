@@ -4,17 +4,6 @@ function icon(name, extraClass = '') {
   return `<svg class="icon ${extraClass}" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-${name}"></use></svg>`;
 }
 
-// Safe text setter — always textContent, never innerHTML, per security rules.
-function el(tag, { className, attrs, text } = {}) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (attrs) {
-    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
-  }
-  if (text !== undefined) node.textContent = text;
-  return node;
-}
-
 function escapeForExcerpt(text, max = 70) {
   if (!text) return '';
   const trimmed = text.length > max ? text.slice(0, max) + '…' : text;
@@ -46,6 +35,7 @@ function setActiveTab(routeName) {
 }
 
 function showHeader({ title, showBack }) {
+  hideHomeHeader();
   const header = document.getElementById('appHeader');
   if (!header) return;
   header.hidden = false;
@@ -59,4 +49,18 @@ function hideHeader() {
   if (header) header.hidden = true;
 }
 
-export const UI = { icon, el, escapeForExcerpt, escapeHTML, toast, setActiveTab, showHeader, hideHeader };
+function showHomeHeader() {
+  hideHeader();
+  const header = document.getElementById('homeHeader');
+  if (header) header.hidden = false;
+}
+
+function hideHomeHeader() {
+  const header = document.getElementById('homeHeader');
+  if (header) header.hidden = true;
+}
+
+export const UI = {
+  icon, escapeForExcerpt, escapeHTML, toast, setActiveTab,
+  showHeader, hideHeader, showHomeHeader, hideHomeHeader
+};

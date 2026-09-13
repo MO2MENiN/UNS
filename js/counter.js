@@ -9,10 +9,6 @@ function getCount(sectionId, dhikrId) {
   return Storage.getProgress(itemKey(sectionId, dhikrId));
 }
 
-function isComplete(sectionId, dhikrId, target) {
-  return getCount(sectionId, dhikrId) >= target;
-}
-
 // Increments the counter, clamped to [0, target]. Returns { count, justCompleted }.
 function increment(sectionId, dhikrId, target) {
   const key = itemKey(sectionId, dhikrId);
@@ -38,4 +34,4 @@ function reset(sectionId, dhikrId) {
   return 0;
 }
 
-export const Counter = { itemKey, getCount, isComplete, increment, decrement, reset };
+export const Counter = { itemKey, getCount, increment, decrement, reset };

@@ -39,21 +39,45 @@
     <h1 class="app-header__title"></h1>
   </header>
 
+  <header class="home-header" id="homeHeader" hidden>
+    <div class="home-header__row">
+      <div class="home-header__brand">
+        <div class="home-header__mark">
+          <img src="assets/icons/app-icon-192.png" alt="" width="42" height="42" />
+        </div>
+        <div>
+          <p class="home-header__title">أنس</p>
+          <p class="home-header__subtitle">الأذكار والأدعية اليومية</p>
+        </div>
+      </div>
+      <button class="btn btn--icon home-header__theme" id="themeToggleBtn" aria-label="تبديل المظهر"></button>
+    </div>
+    <div class="search-field home-header__search" id="homeSearchField">
+      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-search"></use></svg>
+      <input type="search" id="homeSearchInput" placeholder="ابحث في الأذكار والأدعية…" aria-label="بحث" />
+    </div>
+  </header>
+
   <main id="view" role="main"></main>
 
   <nav class="tabbar" aria-label="التنقل الرئيسي">
-    <a class="tabbar__item" data-route="home" href="/" data-route-link>
-      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-home"></use></svg>
-      <span>الرئيسية</span>
-    </a>
-    <a class="tabbar__item" data-route="favorites" href="/favorites" data-route-link>
-      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
-      <span>المفضلة</span>
-    </a>
-    <a class="tabbar__item" data-route="settings" href="/settings" data-route-link>
-      <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-settings"></use></svg>
-      <span>الإعدادات</span>
-    </a>
+    <div class="tabbar__items">
+      <a class="tabbar__item is-active" data-route="home" href="/" data-route-link aria-label="الرئيسية">
+        <span class="tabbar__bump">
+          <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-home"></use></svg>
+        </span>
+      </a>
+      <a class="tabbar__item" data-route="favorites" href="/favorites" data-route-link aria-label="المفضلة">
+        <span class="tabbar__bump">
+          <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+        </span>
+      </a>
+      <a class="tabbar__item" data-route="settings" href="/settings" data-route-link aria-label="الإعدادات">
+        <span class="tabbar__bump">
+          <svg class="icon" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-settings"></use></svg>
+        </span>
+      </a>
+    </div>
   </nav>
 </div>
 

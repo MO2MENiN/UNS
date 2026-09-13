@@ -1,6 +1,6 @@
 // service-worker.js — manual, dependency-free offline-first caching.
 
-const CACHE_VERSION = 'uns-cache-v2';
+const CACHE_VERSION = 'uns-cache-v11';
 
 // All paths are relative to this file's location, so the app works
 // whether it's deployed at the domain root or in a sub-directory.

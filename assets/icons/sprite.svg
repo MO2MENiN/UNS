@@ -164,6 +164,27 @@
     <path d="M5.1 15a7 7 0 0 0 12 3.4M18.9 9a7 7 0 0 0-12-3.4" stroke-linecap="round"/>
   </symbol>
 
+  <symbol id="icon-minus" viewBox="0 0 24 24">
+    <path d="M5 12h14" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="icon-fast-forward" viewBox="0 0 24 24">
+    <path d="M13.6 4.8 6.4 12l7.2 7.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20.2 4.8 13 12l7.2 7.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="icon-vibration" viewBox="0 0 24 24">
+    <rect x="8" y="3.5" width="8" height="17" rx="1.6"/>
+    <path d="M11 17h2" stroke-linecap="round"/>
+    <path d="M4.5 8.5v7M2.3 10.3v3.4" stroke-linecap="round"/>
+    <path d="M19.5 8.5v7M21.7 10.3v3.4" stroke-linecap="round"/>
+  </symbol>
+
+  <symbol id="icon-text-size" viewBox="0 0 24 24">
+    <path d="M3 6.5h6M6 6.5v9" stroke-linecap="round" stroke-width="1.4"/>
+    <path d="M12 4.2h9.5M16.75 4.2v15.6" stroke-linecap="round" stroke-width="2"/>
+  </symbol>
+
   <symbol id="icon-check" viewBox="0 0 24 24">
     <path d="M4.5 12.8l4.5 4.5 10.5-11" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>

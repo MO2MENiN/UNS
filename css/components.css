@@ -15,11 +15,6 @@
 }
 .btn:active { transform: scale(0.96); }
 
-.btn--primary {
-  background: var(--color-primary-2);
-  color: #FCFBF6;
-}
-
 .btn--ghost {
   background: var(--color-surface-2);
   color: var(--color-text);
@@ -37,7 +32,7 @@
   padding: 0;
   background: var(--color-surface-2);
 }
-.btn--icon.is-active { background: var(--color-accent); color: var(--color-primary); }
+.btn--icon.is-active { background: var(--color-accent); color: var(--color-brand); }
 
 /* Cards */
 .card {
@@ -90,50 +85,60 @@
 }
 .empty-state p { margin: 0; font-size: 0.95rem; max-width: 32ch; }
 
-/* Tab bar */
+/* Tab bar — a floating rounded dock. The active tab's icon rises into a ringed
+   circle that overlaps the bar's own top edge (plain CSS overlap, not an SVG
+   cutout), which renders reliably everywhere unlike a hand-drawn notch curve. */
 .tabbar {
   position: fixed;
-  inset-inline: 0;
-  bottom: 0;
+  inset-inline: var(--space-4);
+  bottom: calc(env(safe-area-inset-bottom, 0) + var(--space-3));
   z-index: 30;
   height: var(--tabbar-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--color-border);
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  box-shadow: var(--shadow-lg), 0 1px 0 var(--color-on-brand-border) inset;
+  overflow: visible;
+}
+
+.tabbar__items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100%;
 }
 
 .tabbar__item {
-  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: var(--space-2) var(--space-4);
-  color: var(--color-text-muted);
-  font-size: 0.72rem;
-  border-radius: var(--radius-md);
-  transition: color var(--duration-fast);
+  justify-content: center;
+  height: 100%;
 }
-.tabbar__item .icon { width: 22px; height: 22px; }
-.tabbar__item.is-active { color: var(--color-primary-2); }
-.tabbar__item.is-active .icon { stroke-width: 1.9; }
-.tabbar__item.is-active::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 4px; height: 4px;
+
+.tabbar__bump {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--color-accent);
+  color: var(--color-on-brand-muted);
+  transition: all var(--duration-med) var(--ease-out);
 }
+.tabbar__bump .icon { width: 21px; height: 21px; }
+
+.tabbar__item.is-active .tabbar__bump {
+  width: 50px;
+  height: 50px;
+  background: var(--color-on-brand);
+  color: var(--color-brand);
+  transform: translateY(-16px);
+  box-shadow: var(--shadow-lg), 0 0 0 3px var(--color-accent);
+}
+.tabbar__item.is-active .tabbar__bump .icon { width: 22px; height: 22px; stroke-width: 1.8; }
 
 /* Toast */
 .toast {
   position: fixed;
-  bottom: calc(var(--tabbar-h) + var(--space-4));
+  bottom: calc(var(--tabbar-h) + var(--space-3) + env(safe-area-inset-bottom, 0) + var(--space-4));
   left: 50%;
   transform: translateX(-50%) translateY(20px);
   background: var(--color-primary);
@@ -175,7 +180,7 @@
   transition: transform var(--duration-med) var(--ease-out);
 }
 .switch.is-on { background: var(--color-primary-2); border-color: var(--color-primary-2); }
-.switch.is-on::after { transform: translateX(-20px); background: #fff; }
+.switch.is-on::after { transform: translateX(-20px); background: var(--color-on-accent); }
 
 /* Section label */
 .section-label {
@@ -189,33 +194,4 @@
   margin: 0;
   color: var(--color-text-muted);
   font-weight: 700;
-}
-
-/* Skeleton loading */
-.skeleton {
-  background: linear-gradient(90deg, var(--color-surface-2) 25%, var(--color-border) 37%, var(--color-surface-2) 63%);
-  background-size: 400% 100%;
-  animation: skeleton-loading 1.4s ease infinite;
-  border-radius: var(--radius-md);
-}
-@keyframes skeleton-loading {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
-}
-
-/* Ready badge for install/offline state */
-.ready-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  background: var(--color-surface-2);
-}
-.ready-pill .dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--color-success);
 }

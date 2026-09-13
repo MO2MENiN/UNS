@@ -69,7 +69,7 @@ function resolvedThemeIcon() {
 /* -------------------------------------------------------------------- */
 
 function renderHome() {
-  UI.hideHeader();
+  UI.showHomeHeader();
   UI.setActiveTab('home');
   const view = document.getElementById('view');
 
@@ -106,24 +106,6 @@ function renderHome() {
 
   view.innerHTML = `
     <div class="container">
-      <div class="home-hero">
-        <div class="home-hero__brand">
-          <div class="home-hero__mark">${UI.icon('mark')}</div>
-          <div>
-            <p class="home-hero__title">أنس <span style="opacity:.55;font-weight:500">UNS</span></p>
-            <p class="home-hero__subtitle">الأذكار والأدعية اليومية</p>
-          </div>
-        </div>
-        <div class="home-hero__actions">
-          <button class="btn btn--icon" id="themeToggleBtn" aria-label="تبديل المظهر">${UI.icon(resolvedThemeIcon())}</button>
-        </div>
-      </div>
-
-      <div class="search-field" id="homeSearchField">
-        ${UI.icon('search')}
-        <input type="search" id="homeSearchInput" placeholder="ابحث في الأذكار والأدعية…" aria-label="بحث" />
-      </div>
-
       ${continueBlock}
       ${favBlock}
 
@@ -146,13 +128,18 @@ function renderHome() {
         </a>`;
     }).join('');
   }
+}
 
-  document.getElementById('themeToggleBtn').addEventListener('click', () => {
+// The sticky home header is static markup in index.html (not re-rendered per visit),
+// so its listeners are wired once at bootstrap rather than inside renderHome().
+function wireHomeHeader() {
+  const themeBtn = document.getElementById('themeToggleBtn');
+  themeBtn.innerHTML = UI.icon(resolvedThemeIcon());
+  themeBtn.addEventListener('click', () => {
     const resolved = document.documentElement.getAttribute('data-theme');
     const next = resolved === 'dark' ? 'light' : 'dark';
     Settings.set('theme', next);
-    const btn = document.getElementById('themeToggleBtn');
-    btn.innerHTML = UI.icon(resolvedThemeIcon());
+    themeBtn.innerHTML = UI.icon(resolvedThemeIcon());
   });
 
   const searchInput = document.getElementById('homeSearchInput');
@@ -285,7 +272,7 @@ function renderDhikr({ sectionId, dhikrId }) {
           </button>
         </div>
         <div class="dhikr-secondary-row">
-          <button class="btn btn--ghost" id="decrementBtn">${UI.icon('back')} إنقاص</button>
+          <button class="btn btn--ghost" id="decrementBtn">${UI.icon('minus')} إنقاص</button>
           <button class="btn btn--ghost" id="resetBtn">${UI.icon('reset')} إعادة تعيين</button>
         </div>
       </div>
@@ -476,7 +463,7 @@ function renderSettings() {
     ['light', 'فاتح', 'sun'], ['dark', 'داكن', 'moon'], ['system', 'تلقائي', 'theme-auto']
   ];
   const fontOptions = [
-    ['sm', 'صغير'], ['md', 'متوسط'], ['lg', 'كبير'], ['xl', 'أكبر']
+    ['sm', 'صغير', 13], ['md', 'متوسط', 16], ['lg', 'كبير', 19], ['xl', 'أكبر', 22]
   ];
 
   view.innerHTML = `
@@ -484,16 +471,16 @@ function renderSettings() {
       <div class="settings-group">
         <p class="settings-group__title">المظهر</p>
         <div class="settings-list">
-          <div class="settings-row">
+          <div class="settings-row settings-row--stack">
             <div class="settings-row__label"><span>السمة</span></div>
             <div class="segmented" id="themeSeg">
               ${themeOptions.map(([v, l, ic]) => `<button data-value="${v}" class="${s.theme === v ? 'is-active' : ''}">${UI.icon(ic)}<span>${l}</span></button>`).join('')}
             </div>
           </div>
-          <div class="settings-row">
+          <div class="settings-row settings-row--stack">
             <div class="settings-row__label"><span>حجم الخط</span></div>
             <div class="segmented" id="fontSeg">
-              ${fontOptions.map(([v, l]) => `<button data-value="${v}" class="${s.fontSize === v ? 'is-active' : ''}">${l}</button>`).join('')}
+              ${fontOptions.map(([v, l, size]) => `<button data-value="${v}" class="${s.fontSize === v ? 'is-active' : ''}"><svg class="icon" style="width:${size}px;height:${size}px" aria-hidden="true"><use href="assets/icons/sprite.svg#icon-text-size"></use></svg><span>${l}</span></button>`).join('')}
             </div>
           </div>
         </div>
@@ -507,11 +494,11 @@ function renderSettings() {
             <button class="switch ${s.tashkeel ? 'is-on' : ''}" id="tashkeelSwitch" role="switch" aria-checked="${s.tashkeel}"></button>
           </div>
           <div class="settings-row">
-            <div class="settings-row__label"><span>الانتقال التلقائي</span><span class="settings-row__hint">الانتقال للذكر التالي عند الاكتمال</span></div>
+            <div class="settings-row__label"><span>${UI.icon('fast-forward')} الانتقال التلقائي</span><span class="settings-row__hint">الانتقال للذكر التالي عند الاكتمال</span></div>
             <button class="switch ${s.autoNext ? 'is-on' : ''}" id="autoNextSwitch" role="switch" aria-checked="${s.autoNext}"></button>
           </div>
           <div class="settings-row">
-            <div class="settings-row__label"><span>الاهتزاز</span><span class="settings-row__hint">اهتزاز خفيف عند العد</span></div>
+            <div class="settings-row__label"><span>${UI.icon('vibration')} الاهتزاز</span><span class="settings-row__hint">اهتزاز خفيف عند العد</span></div>
             <button class="switch ${s.vibration ? 'is-on' : ''}" id="vibrationSwitch" role="switch" aria-checked="${s.vibration}"></button>
           </div>
         </div>
@@ -608,6 +595,7 @@ async function bootstrap() {
   Storage.applyDailyResetIfNeeded();
 
   wireHeaderBack();
+  wireHomeHeader();
   registerRoutes();
   await loadAllData();
   Router.start();

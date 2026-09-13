@@ -50,4 +50,4 @@ function vibrate(pattern = 15) {
   }
 }
 
-export const Settings = { applyAll, applyTheme, applyFontSize, watchSystemTheme, get, set, vibrate };
+export const Settings = { applyAll, watchSystemTheme, get, set, vibrate };
