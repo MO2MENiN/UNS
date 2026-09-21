@@ -7,6 +7,7 @@ import { Favorites } from './favorites.js';
 import { Search } from './search.js';
 import { Settings } from './settings.js';
 import { UI } from './ui.js';
+import { Install } from './install.js';
 
 const DATA_PATH = 'data/';
 
@@ -504,6 +505,8 @@ function renderSettings() {
         </div>
       </div>
 
+      ${installSectionMarkup()}
+
       <div class="settings-group">
         <p class="settings-group__title">البيانات</p>
         <div class="settings-list">
@@ -544,6 +547,58 @@ function renderSettings() {
   document.getElementById('resetProgressBtn').addEventListener('click', () => {
     Storage.resetAllProgress();
     UI.toast('تم تصفير جميع العدادات');
+  });
+  wireInstallSection();
+}
+
+function installSectionMarkup() {
+  if (Install.isStandalone()) {
+    return `
+      <div class="settings-group">
+        <p class="settings-group__title">التثبيت</p>
+        <div class="settings-list">
+          <div class="settings-row">
+            <div class="settings-row__label"><span>${UI.icon('check')} التطبيق مثبّت</span><span class="settings-row__hint">يعمل الآن كتطبيق مستقل بدون إنترنت</span></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  if (Install.canPromptInstall()) {
+    const androidStyle = Install.isAndroid();
+    return `
+      <div class="settings-group">
+        <p class="settings-group__title">التثبيت</p>
+        <div class="settings-list">
+          <button class="settings-row" id="installBtn" style="width:100%;text-align:start;">
+            <div class="settings-row__label"><span>${UI.icon(androidStyle ? 'android' : 'download')} ${androidStyle ? 'ثبّت التطبيق على أندرويد' : 'ثبّت التطبيق'}</span><span class="settings-row__hint">للوصول السريع والعمل بدون إنترنت</span></div>
+          </button>
+        </div>
+      </div>`;
+  }
+
+  if (Install.isIOS()) {
+    return `
+      <div class="settings-group">
+        <p class="settings-group__title">التثبيت</p>
+        <div class="settings-list">
+          <div class="settings-row">
+            <div class="settings-row__label"><span>${UI.icon('apple')} التثبيت على iOS</span><span class="settings-row__hint">اضغط ${UI.icon('share')} زر المشاركة في Safari، ثم اختر "إضافة إلى الشاشة الرئيسية"</span></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  return '';
+}
+
+function wireInstallSection() {
+  const btn = document.getElementById('installBtn');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const outcome = await Install.promptInstall();
+    if (outcome === 'accepted') UI.toast('جارٍ تثبيت التطبيق…');
+    else if (outcome === 'dismissed') UI.toast('يمكنك تثبيت التطبيق لاحقًا من هنا');
   });
 }
 
@@ -601,6 +656,11 @@ async function bootstrap() {
   Router.start();
 
   registerServiceWorker();
+
+  Install.init(() => {
+    const settingsTab = document.querySelector('.tabbar__item[data-route="settings"]');
+    if (settingsTab && settingsTab.classList.contains('is-active')) renderSettings();
+  });
 }
 
 document.addEventListener('DOMContentLoaded', bootstrap);

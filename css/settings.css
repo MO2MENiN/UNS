@@ -53,7 +53,18 @@
   width: 17px; height: 17px;
   color: var(--color-text-muted);
 }
-.settings-row__hint { font-size: 0.75rem; color: var(--color-text-muted); }
+.settings-row__hint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.settings-row__hint .icon {
+  width: 13px; height: 13px;
+  vertical-align: middle;
+}
 
 .segmented {
   display: flex;

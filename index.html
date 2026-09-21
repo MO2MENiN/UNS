@@ -8,7 +8,14 @@
 <meta name="theme-color" content="#0F1F1A" />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" href="assets/icons/favicon-48.png" type="image/png" sizes="48x48" />
-<link rel="apple-touch-icon" href="assets/icons/app-icon-192.png" />
+
+<!-- iOS-specific PWA support: Safari ignores most of manifest.json, so "Add to Home
+     Screen" relies on these meta tags for standalone mode, status bar style, the name
+     shown under the icon, and an opaque (non-transparent) touch icon. -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="أنس" />
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="stylesheet" href="css/main.css" />
 <link rel="stylesheet" href="css/components.css" />
 <link rel="stylesheet" href="css/home.css" />
