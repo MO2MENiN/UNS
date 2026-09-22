@@ -111,21 +111,24 @@ function renderHome() {
       ${favBlock}
 
       <div class="section-label"><h2>الأقسام</h2></div>
-      <div class="sections-grid" id="sectionsGrid"></div>
+      <div class="sections-list" id="sectionsList"></div>
     </div>
   `;
 
-  const grid = document.getElementById('sectionsGrid');
+  const list = document.getElementById('sectionsList');
   if (!store.sections.length) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">${UI.icon('empty')}<p>تعذر تحميل الأقسام.</p></div>`;
+    list.innerHTML = UI.emptyState('empty', 'تعذر تحميل الأقسام.');
   } else {
-    grid.innerHTML = store.sections.map((s) => {
-      const list = store.dhikrBySection.get(s.id) || [];
+    list.innerHTML = store.sections.map((s) => {
+      const items = store.dhikrBySection.get(s.id) || [];
       return `
-        <a class="card card--pressable section-card" href="/section/${s.id}" data-route-link>
-          <span class="section-card__icon">${UI.icon(s.icon || 'star')}</span>
-          <p class="section-card__title">${UI.escapeHTML(s.title)}</p>
-          <span class="section-card__count">${list.length ? `${list.length} ذكر` : 'لا يوجد محتوى بعد'}</span>
+        <a class="card card--pressable section-row" href="/section/${s.id}" data-route-link>
+          <span class="section-row__icon">${UI.icon(s.icon || 'star')}</span>
+          <span class="section-row__body">
+            <p class="section-row__title">${UI.escapeHTML(s.title)}</p>
+            <p class="section-row__count">${items.length ? `${items.length} ذكر` : 'لا يوجد محتوى بعد'}</p>
+          </span>
+          ${UI.icon('back', 'section-row__chevron')}
         </a>`;
     }).join('');
   }
@@ -153,7 +156,7 @@ function wireHomeHeader() {
 
 function dhikrListMarkup(items, sectionId) {
   if (!items.length) {
-    return `<div class="empty-state">${UI.icon('empty')}<p>لا توجد أذكار مضافة بعد.</p></div>`;
+    return UI.emptyState('empty', 'لا توجد أذكار مضافة بعد.');
   }
   return `<ul class="dhikr-list">
     ${items.map((d, i) => {
@@ -163,7 +166,7 @@ function dhikrListMarkup(items, sectionId) {
       return `
       <li class="dhikr-item-wrap">
         <div class="card card--pressable dhikr-item">
-          <span class="dhikr-item__index">${done ? UI.icon('check') : i + 1}</span>
+          <span class="dhikr-item__index ${done ? 'is-done' : ''}">${done ? UI.icon('check') : i + 1}</span>
           <span class="dhikr-item__body">
             <p class="dhikr-item__title">${UI.escapeHTML(d.title) || 'ذكر بدون عنوان'}</p>
             <p class="dhikr-item__excerpt">${UI.escapeHTML(UI.escapeForExcerpt(presentText(d.text || '')))}</p>
@@ -201,7 +204,7 @@ function renderSection({ id }) {
 
   if (!section) {
     UI.showHeader({ title: 'القسم غير موجود', showBack: true });
-    view.innerHTML = `<div class="container"><div class="empty-state">${UI.icon('empty')}<p>هذا القسم غير متاح.</p></div></div>`;
+    view.innerHTML = `<div class="container">${UI.emptyState('empty', 'هذا القسم غير متاح.')}</div>`;
     return;
   }
 
@@ -231,7 +234,7 @@ function renderDhikr({ sectionId, dhikrId }) {
 
   if (!section || !dhikr) {
     UI.showHeader({ title: 'غير موجود', showBack: true });
-    view.innerHTML = `<div class="container"><div class="empty-state">${UI.icon('empty')}<p>هذا الذكر لم يعد متاحًا.</p></div></div>`;
+    view.innerHTML = `<div class="container">${UI.emptyState('empty', 'هذا الذكر لم يعد متاحًا.')}</div>`;
     return;
   }
 
@@ -266,7 +269,7 @@ function renderDhikr({ sectionId, dhikrId }) {
       <div class="dhikr-complete-banner" id="completeBanner">${UI.icon('check')}<span>تم إكمال هذا الذكر</span></div>
 
       <div class="dhikr-controls">
-        <div class="dhikr-counter-ring">
+        <div class="dhikr-counter-ring" id="counterRing">
           <button class="dhikr-counter-btn" id="counterBtn" aria-label="اضغط للعد">
             <span class="dhikr-counter-btn__num" id="counterNum"></span>
             <span class="dhikr-counter-btn__target" id="counterTarget"></span>
@@ -291,7 +294,9 @@ function renderDhikr({ sectionId, dhikrId }) {
     document.getElementById('counterNum').textContent = String(count);
     document.getElementById('counterTarget').textContent = `من ${target}`;
     document.getElementById('progressLabel').textContent = `${count} / ${target}`;
-    document.getElementById('progressBar').style.width = `${Math.min(100, Math.round((count / target) * 100))}%`;
+    const pct = Math.min(1, count / target);
+    document.getElementById('progressBar').style.width = `${Math.round(pct * 100)}%`;
+    document.getElementById('counterRing').style.setProperty('--dhikr-progress', pct);
 
     const counterBtn = document.getElementById('counterBtn');
     const complete = count >= target;
@@ -300,8 +305,6 @@ function renderDhikr({ sectionId, dhikrId }) {
 
     document.getElementById('prevBtn').disabled = index <= 0;
     document.getElementById('nextBtn').disabled = index >= items.length - 1;
-    document.getElementById('prevBtn').style.opacity = index <= 0 ? 0.4 : 1;
-    document.getElementById('nextBtn').style.opacity = index >= items.length - 1 ? 0.4 : 1;
   }
 
   document.getElementById('counterBtn').addEventListener('click', () => {
@@ -367,7 +370,7 @@ function renderFavorites() {
   const resolved = Favorites.resolve(store.sectionsById, store.dhikrBySection);
 
   if (!resolved.length) {
-    view.innerHTML = `<div class="container"><div class="empty-state">${UI.icon('empty')}<p>لم تُضِف أي ذكر إلى المفضلة بعد.</p></div></div>`;
+    view.innerHTML = `<div class="container">${UI.emptyState('empty', 'لم تُضِف أي ذكر إلى المفضلة بعد.')}</div>`;
     return;
   }
 
@@ -424,12 +427,12 @@ function renderSearch() {
   function runSearch() {
     const q = input.value.trim();
     if (!q) {
-      results.innerHTML = `<div class="empty-state">${UI.icon('search')}<p>ابدأ الكتابة للبحث في جميع الأذكار.</p></div>`;
+      results.innerHTML = UI.emptyState('search', 'ابدأ الكتابة للبحث في جميع الأذكار.');
       return;
     }
     const matches = Search.query(q);
     if (!matches.length) {
-      results.innerHTML = `<div class="empty-state">${UI.icon('empty')}<p>لا توجد نتائج مطابقة لـ "${UI.escapeHTML(q)}".</p></div>`;
+      results.innerHTML = UI.emptyState('empty', `لا توجد نتائج مطابقة لـ "${q}".`);
       return;
     }
     results.innerHTML = `<ul class="dhikr-list">

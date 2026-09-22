@@ -3,12 +3,11 @@
    ========================================================================== */
 
 @media (min-width: 640px) {
-  .sections-grid { grid-template-columns: repeat(3, 1fr); }
   .container { padding: 0 var(--space-6); }
 }
 
 @media (min-width: 900px) {
-  .sections-grid { grid-template-columns: repeat(4, 1fr); }
+  .sections-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2) var(--space-4); }
   .container { max-width: 880px; }
 
   .tabbar {
@@ -21,6 +20,7 @@
 }
 
 @media (max-width: 360px) {
+  .dhikr-counter-ring { width: 152px; height: 152px; }
   .dhikr-counter-btn { width: 132px; height: 132px; }
   .dhikr-counter-btn__num { font-size: 2rem; }
 }

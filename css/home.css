@@ -12,7 +12,7 @@
   margin-top: var(--space-4);
   background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-2) 100%);
   color: var(--color-on-brand);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
 }
 
 .continue-card__icon {
@@ -27,12 +27,12 @@
 .continue-card__icon .icon { width: 20px; height: 20px; }
 .continue-card__body { flex: 1; min-width: 0; }
 .continue-card__label {
-  font-size: 0.72rem;
+  font-size: var(--fs-micro);
   color: var(--color-on-brand-muted);
   margin: 0 0 2px;
 }
 .continue-card__title {
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
   font-weight: 700;
   margin: 0;
   overflow: hidden;
@@ -54,42 +54,52 @@
   transition: width var(--duration-med) var(--ease-out);
 }
 
-/* Sections grid */
-.sections-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-3);
-}
-
-.section-card {
-  padding: var(--space-4);
+/* Sections list — a clean, scannable row list (icon badge + title + count + chevron)
+   rather than a dense icon grid, so longer Arabic section titles never crowd or crop. */
+.sections-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  min-height: 108px;
+  gap: var(--space-2);
 }
 
-.section-card__icon {
-  width: 42px; height: 42px;
-  border-radius: var(--radius-pill);
-  background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-primary-2) 18%, transparent), var(--color-surface-2));
-  border: 1px solid var(--color-border);
+.section-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 13px var(--space-4);
+}
+
+.section-row__icon {
+  width: 44px; height: 44px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--color-primary-2) 20%, transparent), var(--color-surface-2));
   display: flex; align-items: center; justify-content: center;
   color: var(--color-primary-2);
 }
-.section-card__icon .icon { width: 20px; height: 20px; }
+.section-row__icon .icon { width: 21px; height: 21px; }
 
-.section-card__title {
-  font-size: 0.9rem;
+.section-row__body { flex: 1; min-width: 0; }
+.section-row__title {
+  font-size: var(--fs-body);
   font-weight: 700;
   margin: 0;
-  line-height: 1.4;
+  line-height: var(--lh-tight);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.section-row__count {
+  font-size: var(--fs-micro);
+  color: var(--color-text-muted);
+  margin: 3px 0 0;
 }
 
-.section-card__count {
-  font-size: 0.72rem;
+.section-row__chevron {
+  width: 18px; height: 18px;
   color: var(--color-text-muted);
-  margin-top: auto;
+  flex-shrink: 0;
+  opacity: 0.6;
 }
 
 /* Favorites strip on home */
@@ -111,13 +121,13 @@
   gap: 4px;
 }
 .fav-chip__title {
-  font-size: 0.85rem;
+  font-size: var(--fs-caption);
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .fav-chip__section {
-  font-size: 0.72rem;
+  font-size: var(--fs-micro);
   color: var(--color-text-muted);
 }

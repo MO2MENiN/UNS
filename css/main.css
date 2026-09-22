@@ -30,13 +30,18 @@
      (filled buttons, active switches) that stay teal/gold in both themes. */
   --color-on-accent: #FCFBF6;
 
-  --shadow-sm: 0 1px 2px rgba(15, 31, 26, 0.06);
-  --shadow-md: 0 6px 20px rgba(15, 31, 26, 0.08);
-  --shadow-lg: 0 16px 40px rgba(15, 31, 26, 0.12);
+  /* Elevation — tinted with the brand ink rather than flat black, and layered
+     (ambient + a tighter contact shadow) the way most refined native UIs do it,
+     so raised surfaces read as lifted paper rather than a blurred drop-shadow. */
+  --shadow-xs: 0 1px 2px rgba(15, 31, 26, 0.05);
+  --shadow-sm: 0 1px 1px rgba(15, 31, 26, 0.04), 0 4px 10px rgba(15, 31, 26, 0.06);
+  --shadow-md: 0 2px 4px rgba(15, 31, 26, 0.05), 0 10px 24px rgba(15, 31, 26, 0.08);
+  --shadow-lg: 0 4px 10px rgba(15, 31, 26, 0.08), 0 22px 48px rgba(15, 31, 26, 0.14);
 
   --radius-sm: 10px;
   --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
   --radius-pill: 999px;
 
   --space-1: 4px;
@@ -51,11 +56,25 @@
   --font-ui: "Segoe UI", "Tahoma", "Geeza Pro", "Noto Naskh Arabic", "Arial", sans-serif;
   --font-quran: "Traditional Arabic", "Amiri", "Noto Naskh Arabic", "Geeza Pro", "Segoe UI", serif;
 
+  /* Type scale — a fixed ratio so every heading/body/caption in the app comes from
+     one system instead of ad-hoc font-sizes scattered per component. */
+  --fs-display: 1.65rem;
+  --fs-title: 1.15rem;
+  --fs-subtitle: 1rem;
+  --fs-body: 0.92rem;
+  --fs-caption: 0.8rem;
+  --fs-micro: 0.72rem;
+  --lh-tight: 1.25;
+  --lh-normal: 1.55;
+  --lh-relaxed: 1.9;
+
   --fs-root: 16px;
   --fs-scale: 1;
   --duration-fast: 140ms;
   --duration-med: 260ms;
+  --duration-slow: 420ms;
   --ease-out: cubic-bezier(.16,.8,.3,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
 
   --header-h: 60px;
   --tabbar-h: 64px;
@@ -73,9 +92,10 @@
   --color-primary-2: #4FA98C;
   --color-accent: #D8B65B;
   --color-accent-2: #E7C878;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-sm: 0 1px 1px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.32), 0 12px 28px rgba(0, 0, 0, 0.34);
+  --shadow-lg: 0 4px 10px rgba(0, 0, 0, 0.38), 0 24px 52px rgba(0, 0, 0, 0.46);
   color-scheme: dark;
 }
 
@@ -106,8 +126,10 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-ui);
-  line-height: 1.6;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
   transition: background var(--duration-med) var(--ease-out), color var(--duration-med) var(--ease-out);
 }
 
@@ -163,21 +185,25 @@ ul { list-style: none; margin: 0; padding: 0; }
   align-items: center;
   gap: var(--space-3);
   padding: 0 var(--space-4);
-  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 1px 0 var(--color-border);
 }
 
 .app-header__back {
-  width: 40px; height: 40px;
+  width: 38px; height: 38px;
   display: flex; align-items: center; justify-content: center;
   border-radius: var(--radius-pill);
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 .app-header__back:hover { background: var(--color-surface-2); }
+.app-header__back:active { transform: scale(0.9); }
 
 .app-header__title {
-  font-size: 1.05rem;
+  font-size: var(--fs-subtitle);
   font-weight: 700;
+  letter-spacing: 0.1px;
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -227,15 +253,15 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .home-header__title {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: var(--fs-title);
   font-weight: 800;
   color: var(--color-on-brand);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
 
 .home-header__subtitle {
   margin: 2px 0 0;
-  font-size: 0.78rem;
+  font-size: var(--fs-micro);
   color: var(--color-on-brand-muted);
 }
 
@@ -243,8 +269,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   background: var(--color-on-brand-soft);
   color: var(--color-accent);
   flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
-.home-header__theme:active { transform: scale(0.94); }
+.home-header__theme:active { transform: scale(0.9); }
 
 .home-header__search {
   background: var(--color-on-brand-soft);
@@ -261,7 +288,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 main#view {
   flex: 1;
-  padding-bottom: calc(var(--tabbar-h) + var(--space-3) + env(safe-area-inset-bottom, 0) + var(--space-5));
+  padding-bottom: calc(var(--tabbar-h) + 18px + var(--space-5));
 }
 
 .container {

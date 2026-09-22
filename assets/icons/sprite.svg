@@ -114,11 +114,6 @@
     <path d="M12 20.3S3.8 15.3 3.8 9.3a4.6 4.6 0 0 1 8.2-2.9 4.6 4.6 0 0 1 8.2 2.9c0 6-8.2 11-8.2 11z" stroke-linejoin="round"/>
   </symbol>
 
-  <symbol id="icon-scroll" viewBox="0 0 24 24">
-    <path d="M6.8 4h9.4a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M9.5 9.2h6.4M9.5 12.8h6.4M9.5 16.4h4" stroke-linecap="round"/>
-  </symbol>
-
   <symbol id="icon-grave" viewBox="0 0 24 24">
     <path d="M6.5 21.5V11a5.5 5.5 0 0 1 11 0v10.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M10.6 8.6h2.8" stroke-linecap="round"/>

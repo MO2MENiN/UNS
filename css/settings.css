@@ -7,7 +7,7 @@
 }
 
 .settings-group__title {
-  font-size: 0.78rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   color: var(--color-text-muted);
   margin: 0 0 var(--space-2);
@@ -16,8 +16,8 @@
 
 .settings-list {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs), 0 0 0 1px var(--color-border);
   overflow: hidden;
 }
 
@@ -26,10 +26,13 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  padding: var(--space-4);
+  padding: 13px var(--space-4);
   border-bottom: 1px solid var(--color-border);
+  transition: background var(--duration-fast) var(--ease-out);
 }
 .settings-row:last-child { border-bottom: none; }
+button.settings-row:hover { background: var(--color-surface-2); }
+button.settings-row:active { background: var(--color-surface-2); }
 
 .settings-row--stack {
   flex-direction: column;
@@ -46,7 +49,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.9rem;
+  font-size: var(--fs-body);
   font-weight: 600;
 }
 .settings-row__label span:first-child .icon {
@@ -54,7 +57,7 @@
   color: var(--color-text-muted);
 }
 .settings-row__hint {
-  font-size: 0.75rem;
+  font-size: var(--fs-caption);
   color: var(--color-text-muted);
   display: inline-flex;
   align-items: center;
@@ -80,12 +83,13 @@
   flex: 1;
   min-width: 0;
   gap: 4px;
-  padding: 7px 4px;
+  padding: 8px 4px;
   border-radius: var(--radius-pill);
-  font-size: 0.76rem;
+  font-size: var(--fs-caption);
   font-weight: 600;
   color: var(--color-text-muted);
   white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 .segmented button span {
   overflow: hidden;
@@ -99,6 +103,7 @@
 .segmented button.is-active {
   background: var(--color-primary);
   color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
 }
 
 .settings-row--danger .settings-row__label span:first-child { color: var(--color-danger); }
@@ -106,6 +111,6 @@
 .app-about {
   text-align: center;
   color: var(--color-text-muted);
-  font-size: 0.78rem;
+  font-size: var(--fs-caption);
   padding: var(--space-5) 0;
 }

@@ -1,6 +1,6 @@
 // service-worker.js — manual, dependency-free offline-first caching.
 
-const CACHE_VERSION = 'uns-cache-v13';
+const CACHE_VERSION = 'uns-cache-v16';
 
 // All paths are relative to this file's location, so the app works
 // whether it's deployed at the domain root or in a sub-directory.
@@ -53,8 +53,7 @@ const PRECACHE_URLS = [
   'data/tasabeeh.json',
   'data/doaa-khatm-alquran.json',
   'data/fadl-aldoaa.json',
-  'data/fadl-althikr.json',
-  'data/fadael-alsowar.json'
+  'data/fadl-althikr.json'
 ].map((path) => new URL(path, SCOPE).toString());
 
 const APP_SHELL_URL = new URL('index.html', SCOPE).toString();

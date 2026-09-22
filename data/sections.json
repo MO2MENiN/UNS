@@ -16,6 +16,5 @@
   { "id": "tasabeeh", "title": "تسابيح", "description": "تسابيح متنوعة", "icon": "beads", "file": "tasabeeh.json" },
   { "id": "doaa-khatm-alquran", "title": "دعاء ختم القرآن الكريم", "description": "دعاء ختم القرآن الكريم", "icon": "book", "file": "doaa-khatm-alquran.json" },
   { "id": "fadl-aldoaa", "title": "فضل الدعاء", "description": "فضل الدعاء", "icon": "hands", "file": "fadl-aldoaa.json" },
-  { "id": "fadl-althikr", "title": "فضل الذكر", "description": "فضل الذكر", "icon": "heart", "file": "fadl-althikr.json" },
-  { "id": "fadael-alsowar", "title": "فضائل السور", "description": "فضائل السور", "icon": "scroll", "file": "fadael-alsowar.json" }
+  { "id": "fadl-althikr", "title": "فضل الذكر", "description": "فضل الذكر", "icon": "heart", "file": "fadl-althikr.json" }
 ]
